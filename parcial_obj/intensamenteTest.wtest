@@ -1,0 +1,92 @@
+import intensamente.*
+
+//Todos los integrantes de un grupo viven un mismo evento
+test "La furia de Juan deberia mantenerse con intensidad 100" {
+    const evento = new Evento(descripcion="asesinato", impacto=50)
+
+    const furia = new Furia(intensidad = 100)
+    const alegria = new Alegria(intensidad = 20)
+    const tristeza = new Tristeza(intensidad = 10)
+    const desagrado = new Emocion(intensidad = 35)
+    const temor = new Emocion(intensidad = 68)
+    const ansiedad = new Ansiedad(intensidad = 40)
+
+    const Juan = new Persona(nombre="Juan", edad=14)
+    const Pedro = new Persona(nombre="Pedro", edad=16)
+    const Jesus = new Persona(nombre="Jesus", edad=19)
+
+    furia.aprenderPalabrota("Hojota")
+
+    Juan.otorgarEmocion(furia)
+    Juan.otorgarEmocion(alegria)
+    Pedro.otorgarEmocion(tristeza)
+    Pedro.otorgarEmocion(desagrado)
+    Jesus.otorgarEmocion(temor)
+    Jesus.otorgarEmocion(ansiedad)
+
+    const personas = [Pedro,Juan,Jesus]
+    
+    evento.ocurrirColectivamente(personas)
+
+    assert.equals(furia.informarIntensidad(), 100)
+}
+
+test "La alegria de Juan deberia tener intesidad 50 tras el evento" {
+    const evento = new Evento(descripcion="asesinato", impacto=50)
+
+    const furia = new Furia(intensidad = 100)
+    const alegria = new Alegria(intensidad = 100)
+    const tristeza = new Tristeza(intensidad = 10)
+    const desagrado = new Emocion(intensidad = 35)
+    const temor = new Emocion(intensidad = 68)
+    const ansiedad = new Ansiedad(intensidad = 40)
+
+    const Juan = new Persona(nombre="Juan", edad=14)
+    const Pedro = new Persona(nombre="Pedro", edad=16)
+    const Jesus = new Persona(nombre="Jesus", edad=19)
+
+    Juan.otorgarEmocion(furia)
+    Juan.otorgarEmocion(alegria)
+    Pedro.otorgarEmocion(tristeza)
+    Pedro.otorgarEmocion(desagrado)
+    Jesus.otorgarEmocion(temor)
+    Jesus.otorgarEmocion(ansiedad)
+
+    const personas = [Pedro,Juan,Jesus]
+    
+    evento.ocurrirColectivamente(personas)
+    evento.ocurrirColectivamente(personas)
+    evento.ocurrirColectivamente(personas)
+
+    assert.equals(alegria.informarIntensidad(), 100)
+}
+
+test "La tristeza de Pedro deberia mantenerse con intensidad 100" {
+    const evento = new Evento(descripcion="asesinato", impacto=50)
+
+    const furia = new Furia(intensidad = 100)
+    const alegria = new Alegria(intensidad = 200)
+    const tristeza = new Tristeza(intensidad = 100)
+    const desagrado = new Emocion(intensidad = 35)
+    const temor = new Emocion(intensidad = 100)
+    const ansiedad = new Ansiedad(intensidad = 40)
+
+    const Juan = new Persona(nombre="Juan", edad=14)
+    const Pedro = new Persona(nombre="Pedro", edad=16)
+    const Jesus = new Persona(nombre="Jesus", edad=19)
+
+    Juan.otorgarEmocion(furia)
+    Juan.otorgarEmocion(alegria)
+    Pedro.otorgarEmocion(tristeza)
+    Pedro.otorgarEmocion(desagrado)
+    Jesus.otorgarEmocion(temor)
+    Jesus.otorgarEmocion(ansiedad)
+
+    const personas = [Pedro,Juan,Jesus]
+    
+    evento.ocurrirColectivamente(personas)
+    evento.ocurrirColectivamente(personas)
+    evento.ocurrirColectivamente(personas)
+
+    assert.equals(temor.informarIntensidad(), 100)
+}
